@@ -1,5 +1,3 @@
-import React from "react";
-
 import telegram from "../../assets/icons/icon.Fb.svg";
 import facebook from "../../assets/icons/icon.Tg.svg";
 import whatsapp from "../../assets/icons/icon.Wh.svg";

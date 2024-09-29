@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import comments from "../../assets/icons/icon.Comments.svg";
 import heart from "../../assets/icons/icon.Heart.svg";
