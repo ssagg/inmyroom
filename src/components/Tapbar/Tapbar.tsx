@@ -11,13 +11,13 @@ import styles from "./Tapbar.module.scss";
 const Tapbar = ({ scrollUp }: { scrollUp: () => void }) => {
   const [likesNum, setLikes] = useState(0);
   const [commentsNum, setComments] = useState(0);
-
   const [isHidden, setIsHidden] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [prevScrollPos, setPrevScrollPos] = useState<number>(window.scrollY);
   const [scrollTimeout, setScrollTimeout] = useState<number>(0);
   const [isCopied, setIsCopied] = useState(false);
   const shareUrl = window.location.href;
+
   const handleShare = async (url: string) => {
     if (navigator.share) {
       try {
