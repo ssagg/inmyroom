@@ -1,0 +1,14 @@
+.social_list {
+  display: flex;
+  width: 100vw;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px;
+  margin: 0;
+  list-style: none;
+}
+
+.social_list_icon {
+  width: 32px;
+  height: 32px;
+}

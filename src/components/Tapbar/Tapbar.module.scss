@@ -1,0 +1,42 @@
+.tapbar {
+  position: fixed;
+  left: 0;
+  bottom: -1px;
+  width: 100vw;
+  transition: transform 0.3s ease-in-out;
+  background-color: #ffffff;
+  z-index: 100;
+  opacity: 95%;
+  //   animation: tapbar_nav linear;
+  //   animation-timeline: scroll(y);
+}
+
+.tapbar_nav {
+  position: relative;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  height: 58px;
+}
+
+.tapbar_nav_button {
+  width: 85px;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  height: 58px;
+  gap: 8px;
+}
+
+// @keyframes tapbar_nav {
+//   to {
+//     translate: 0 100px;
+//   }
+// }
+
+.hidden {
+  transform: translateY(100%); /* Скрываем тапбар */
+}
