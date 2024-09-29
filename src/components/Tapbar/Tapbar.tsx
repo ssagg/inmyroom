@@ -4,15 +4,15 @@ import comments from "../../assets/icons/icon.Comments.svg";
 import heart from "../../assets/icons/icon.Heart.svg";
 import pageUp from "../../assets/icons/icon.PageUp.svg";
 import share from "../../assets/icons/icon.Share.svg";
+import { SCROLL_DELTA } from "../../constants/constants";
+import Message from "../Message/Message";
 import Modal from "../Modal/Modal";
-import Social from "../Social/Social";
 import styles from "./Tapbar.module.scss";
 
 const Tapbar = ({ scrollUp }: { scrollUp: () => void }) => {
-  const [likesNum, setLikes] = useState(0);
-  const [commentsNum, setComments] = useState(0);
+  const [likesCount, setLikesCount] = useState(0);
+  const [commentCount, setCommentsCount] = useState(0);
   const [isHidden, setIsHidden] = useState<boolean>(false);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [prevScrollPos, setPrevScrollPos] = useState<number>(window.scrollY);
   const [scrollTimeout, setScrollTimeout] = useState<number>(0);
   const [isCopied, setIsCopied] = useState(false);
@@ -35,14 +35,13 @@ const Tapbar = ({ scrollUp }: { scrollUp: () => void }) => {
     }
   };
   const handleScroll = () => {
-    setIsModalOpen(false);
     const currentScrollPos = window.scrollY;
     const timeoutId = setTimeout(() => {
       setIsHidden(false);
     }, 1000);
     const scrollDifference = Math.abs(currentScrollPos - prevScrollPos);
 
-    if (scrollDifference >= 200) {
+    if (scrollDifference >= SCROLL_DELTA) {
       setIsHidden(true);
     } else {
       setScrollTimeout(timeoutId);
@@ -79,16 +78,10 @@ const Tapbar = ({ scrollUp }: { scrollUp: () => void }) => {
           <button
             className={styles.tapbar_nav_button}
             onClick={() => {
-              setIsModalOpen(!isModalOpen);
               handleShare(shareUrl);
             }}
           >
             <img src={share} alt="share" />
-            {isModalOpen && (
-              <Modal>
-                <Social />
-              </Modal>
-            )}
           </button>
 
           <button className={styles.tapbar_nav_button} onClick={scrollUp}>
@@ -96,28 +89,26 @@ const Tapbar = ({ scrollUp }: { scrollUp: () => void }) => {
           </button>
           <button
             className={styles.tapbar_nav_button}
-            onClick={() => setLikes(likesNum + 1)}
+            onClick={() => setLikesCount((prev) => prev + 1)}
           >
             <img src={heart} alt="like" />
-            <span className={styles.tapbar_nav_button_likes}>{likesNum}</span>
+            <span className={styles.tapbar_nav_button_likes}>{likesCount}</span>
           </button>
           <button
             className={styles.tapbar_nav_button}
-            onClick={() => setComments(commentsNum + 1)}
+            onClick={() => setCommentsCount((prev) => prev + 1)}
           >
             <img src={comments} alt="comment" />
             <span className={styles.tapbar_nav_button_likes}>
-              {commentsNum}
+              {commentCount}
             </span>
           </button>
         </nav>
       </div>
       {isCopied && (
-        <div className={styles.copied_overlay}>
-          <div className={styles.copied_message}>
-            <p>Ссылка скопирована в буфер обмена</p>
-          </div>
-        </div>
+        <Modal>
+          <Message />
+        </Modal>
       )}
     </>
   );

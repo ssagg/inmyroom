@@ -7,8 +7,6 @@
   background-color: #ffffff;
   z-index: 100;
   opacity: 95%;
-  //   animation: tapbar_nav linear;
-  //   animation-timeline: scroll(y);
 }
 
 .tapbar_nav {
@@ -31,35 +29,6 @@
   gap: 8px;
 }
 
-// @keyframes tapbar_nav {
-//   to {
-//     translate: 0 100px;
-//   }
-// }
-
 .hidden {
-  transform: translateY(100%); /* Скрываем тапбар */
-}
-
-.copied_overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 100;
-}
-
-.copied_message {
-  background-color: white;
-  padding: 20px;
-  border-radius: 16px;
-  max-width: 200px;
-  width: 100%;
-  color: black;
-  text-align: center;
+  transform: translateY(100%);
 }
