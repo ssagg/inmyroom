@@ -18,14 +18,19 @@ const Tapbar = ({ scrollUp }: { scrollUp: () => void }) => {
   const [scrollTimeout, setScrollTimeout] = useState<number>(0);
   const [isCopied, setIsCopied] = useState(false);
   const shareUrl = window.location.href;
-  const handleCopyToClipboard = async (url: string) => {
-    try {
+  const handleShare = async (url: string) => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Поделиться страницей",
+          url: url,
+        });
+      } catch (error) {
+        console.log("Unable to share");
+      }
+    } else {
       await navigator.clipboard.writeText(url);
       setIsCopied(true);
-      alert("Text copied to clipboard:");
-    } catch (error) {
-      alert("Error copying to clipboard:");
-    } finally {
       setTimeout(() => setIsCopied(false), 1000);
     }
   };
@@ -75,7 +80,7 @@ const Tapbar = ({ scrollUp }: { scrollUp: () => void }) => {
             className={styles.tapbar_nav_button}
             onClick={() => {
               setIsModalOpen(!isModalOpen);
-              handleCopyToClipboard(shareUrl);
+              handleShare(shareUrl);
             }}
           >
             <img src={share} alt="share" />
@@ -107,6 +112,13 @@ const Tapbar = ({ scrollUp }: { scrollUp: () => void }) => {
           </button>
         </nav>
       </div>
+      {isCopied && (
+        <div className={styles.copied_overlay}>
+          <div className={styles.copied_message}>
+            <p>Ссылка скопирована в буфер обмена</p>
+          </div>
+        </div>
+      )}
     </>
   );
 };
